@@ -1,0 +1,175 @@
+Part B
+===============================================================================
+
+tweet_sentiment.py
+-------------------------------------------------------------------------------
+This python script computes the happiness score for each tweet from the sentiment
+scores of each word in tweet.
+
+The script first reads the sentiment file and stores it into two dictionaries.
+Terms with more than one word are called phrases and are stored in phrase dictionary
+all other words are stored in sentiment dictionary.
+
+Tweets are read one by one from tweet file and loaded into json object to extract
+tweet text. Happiness score is computed on this tweet text. 
+
+For computing happiness score, first all the phrases in phrase dictionary are 
+searched in tweet text, if they are present in the tweet text and their 
+corresponding score is added to total sentiment score of the tweet.
+
+After all the phrases are checked, the txt is split into word list. Every word
+in word list is then check if it is present in sentiment dictionary. If the 
+word is present, then its sentiment score is added to the total score.
+
+Total happiness score of tweet and tweet text are stored as a tuple (score, tweet_text)
+in a list. Once score for all the tweets are computed, the list is sorted in 
+descendig order.
+
+For output, first 10 tweets from the list are printed followed by last 10 tweets.
+
+tweet_sentiment_abanso2.txt is submitted with this home work.
+
+Contents of file are as follows:
+12.0: S/o to baby boy, i know im late but i love him for trying to make us happy thanks babe @DerekLuh keep being active makes me happy at least
+12.0: I really need Utah to win this game. If Utah wins and UNC doesn't make it to the championship game, I will likely win the office pool.
+11.0: RT @ianuragthakur: What a wonderful win to stage back in the #ICCWT20, shown gr8 character. Cngrts #TeamIndia, Great effort @msdhoni and bo…
+11.0: @OFCALDubKoTo  super like super pretty the one and only Maine mendoza . Aldub u maine Bagay  Ka Kay  A.R . bless u both #GodGaveMaineYou
+11.0: RT @gsteffes22: Win or lose we give thanks to the Lord for the privilege to compete and play this awesome game! God is good. What... https:…
+10.0: Love my little champion, making me a proud cheer brother. Love you… https://t.co/VNEcaU3JuB
+10.0: Love supporting good Aussie companies that do great things. @thankyouaus is setting a phenomenal benchmark. Keep... https://t.co/A5bSqQibdP
+10.0: Shoot.Had me feeling right 😎😋 Woo woo woo 😂😜
+10.0: RT @SPIRITHUEL: Encourage beautiful minds.  Inspire beautiful souls.
+10.0: RT @ESPNcricinfo: Great win for India, but their net run-rate still isn't great   Points table: https://t.co/KZU8n5JvZI #WT20 https://t.co/…
+-11.0: RT @tom_harlock: kinda hate this papaw shit because you know his grandkids will give a fuck bout him for rts for a week and then go back to…
+-11.0: RT @tom_harlock: kinda hate this papaw shit because you know his grandkids will give a fuck bout him for rts for a week and then go back to…
+-11.0: Crazy ass bitches https://t.co/kXxzhMqFwY
+-12.0: RT @SooFunnyPost: today: stressed  tomorrow: stressed  next week: stressed  next month: stressed  next year: stressed  next life: stressed
+-12.0: why the fuck is there a swarm of people in pac rn we close in 5 fucking minutes eat shit
+-12.0: RT @dcs200060: Bad ? More like a Marxist totalitarian socialist corrupt as all hell evil worthless *******"*****"*******#Trump2016  https:/…
+-12.0: RT @maridapoet: mom: you need to get your lazy ass up and clean my mf house  me: BITCH YOU NEVER DO NOTHING FUCK .. YOU DO IT !! https://t.…
+-13.0: Yo one more motherfucker brings up my transparency over the butler push one more time u can suck my dick I get no comments or notice but
+-13.0: Can't change ugly if your ugly your ugly. Not even makeup gonna fix the ugly, if you gotta a shit personality U UGLY
+-16.0: RT @NYNYOFFDAMOLLY: u can't slut shame a bitch who don't give a fuck
+
+We can observe that first 10 tweets are happy tweets and next 10 are not happy.
+
+
+
+happiest_actor.py
+-------------------------------------------------------------------------------
+This pyhton script takes the breaking_bad.csv file as input and from the tweets 
+of these actors computes their happiness quotient.
+Happiness quotient is computed such as [Sum of tweet happiness score] / [# tweets]
+
+The logic to compute happiness score of a tweet and to read sentiment file is 
+same as tweet_sentiment.py 
+
+Additionally, the script reads the csv file and seperates actor name and their
+tweet. For the given tweet, it computs its happiness score.
+Python dictionary is used to store this value, where actor name is key and 
+value is a tuple (actor_name, tweet_score, tweet_count, avg).
+If the actor is already present in dictonary, its tuple is updated i.e 
+new tweet scoreis added to total, tweet count is incremented and new avg is
+computed. If actor is not present in dictionary, tuple values are populated 
+and new entry is added to dictionary.
+
+Once all the tweets in csv file are covered, all the tuples in actor dictionary
+are converted to form a list and then the list is sorted in descending order on 
+avg.
+
+Then the actor name and their avg is shown as output.
+
+happiest_actor_abanso2.txt file is submitted with this homework.
+
+The contents of file are as below:
+2.314286: mrbobodenkirk
+2.045455: aaronpaul_8
+1.971014: quiethandfilms
+1.924051: Krystenritter
+1.720000: RjMitte
+1.308824: LuisMoncada77
+1.285714: CharlesEbaker
+1.247191: deanjnorris
+1.058824: betsy_brandt
+1.043011: BryanCranston
+0.740741: mattjonesisdead
+0.444444: DanielMoncada80
+
+We can observe that 'mrbobodenkirk' isthe most happiest actor and 
+'DanielMoncada80' is least happy among these breaking bad actors.
+
+
+
+
+happiest_state.py
+-------------------------------------------------------------------------------
+This python script computes the average happiness score ofeach state and thus 
+determines which state is happiest.
+The happiness score for each state is computed as below
+[Sum of happiness score of tweet belonging to that state] / [#tweet belonging to that state]
+
+The logic to compute happiness score of a tweet and to read sentiment file is 
+same as tweet_sentiment.py 
+
+I have built a abberviation dictionary to get the state full name from its abbreviation.
+
+In order to determine the state of a tweet, I have used the 'place' object.
+If the place object is null, state of tweet cannot be determined, thus ignoring 
+that tweet.
+
+If the place object is not null, check the 'country' of the tweet. Ignore the 
+tweet if country is not 'United States'.
+
+If the 'country' is 'United States', then check the 'place_type' for that tweet.
+
+If 'place_type' is not 'admin or 'city', state cannot be determined from available
+information. Ignore such tweets and move forward to next tweet.
+
+If 'place_type' is 'admin', the full_name field in the place object is in format
+(State, Country). Split the full_name field using comma and take the first value
+as state.
+
+If 'place_type' is 'city', the full_name field in the place object is in format
+(CityName, State_Abbrevation). Split the full_name field using comma and take 
+the second value as state abberaviation. Then using the abberaviation dictionary, 
+get the full name of state.
+
+If 'place_type' is 'neighborhood' or 'poi' or 'country', then ignore the tweet and
+continue to next tweet.
+
+Once the state is determined, get the happiness score of the tweet text.
+
+Store the states in dictionary where key is state name and value is a tuple in 
+format (Sum of Tweet Scores, Number of Tweets)
+If state is already in state dictionay, then update the tuple value accordingly.
+If state is not in state dictionary, then add new entry for state.
+
+Once all the tweets are parsed, the average happiness score of each of state in 
+state dictionary is computed and stored as tuple list in format 
+(state_name, total_state_tweet_score, total_Tweets_from_state, average_tweet_score)
+
+The tuple list is then sorted on avg happiness score in descending order, 
+so that most happiest state is on the top and most unhappy is in bottom.
+
+The happiness score for each state is then displayed on screen.
+
+happiest_state_abanso2.txt is submitted with this homework.
+
+The contents of file are as below:
+5.000000: Louisiana
+5.000000: Hawaii
+2.333333: Michigan
+1.277778: Texas
+1.250000: Massachusetts
+-1.666667: Tennessee
+-2.000000: Missouri
+-2.000000: Oklahoma
+-2.500000: South Carolina
+-3.000000: Alabama
+
+
+We can clearly observe that 'Hawaii' is most happy state and 
+'Alabama' is most unhappy.
+
+
+

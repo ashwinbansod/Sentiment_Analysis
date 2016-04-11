@@ -1,0 +1,150 @@
+Part A
+===============================================================================
+
+fetch_tweets.py
+-------------------------------------------------------------------------------
+As per the write up, installed oauth library and updatedthe tokens required for
+twitter account.
+
+-c fetch_samples:
+This option was used simply to fetch data from twitter and print in on std 
+output. 
+
+The given starter code was not decoding the received response and was thus 
+printing the output in byte format. In order to make in readable, I have added
+the function to decode the response to 'utf-8' format. I have also added a check
+for response status equal to 200 which is HTTP_SUCCESS. If any of the response 
+is not successfully retrived, it will skip the response packet and move on to 
+next one. Thus avoiding the program from crashing.
+
+The top 20 lines of streaming_output is submitted with this homework.
+
+streaming_output_full.txt was used as input for other python files. It is not 
+possible to read this file in byte format and load it into jason object. 
+Therefore it was necessary to decode it to 'utf-8' format.
+
+NOTE: Kindly provide the decoded streaming_output_full.txt as input to other 
+python files.
+
+
+-c fetch_by_terms:
+This option was used to fetch data related to a pirticulat term from twitter.
+
+Twitter API sends a http request for this type of queries. 
+For any http request there is one required parameter and other optional 
+parameters. The required parameter 'q' defines the value to be searched.
+Additionally I have used a parameter 'count = 100' which specifies the number
+of tweets for the term mentioned in parameter 'q'. This way, it can be ensured
+that 100 tweets for given term are returned.
+
+search_output.txt is submitted with this homework.
+
+search term I used is "ICCWT20"
+
+Sample tweets are as below:
+
+{"created_at":"Mon Mar 28 19:25:31 +0000 2016","id":714533899540430848,"id_str":"714533899540430848","text":"Just heard that Yuvi is not playing in upcoming matches. I wish this is not true.... #IndianCricket #ICCWT20 #IndvsWI @YUVSTRONG12","entities":{"hashtags":[{"text":"IndianCricket","indices":[85,99]},{"text":"ICCWT20","indices":[100,108]},{"text":"IndvsWI","indices":[109,117]}],"symbols":[],"user_mentions":[{"screen_name":"YUVSTRONG12","name":"yuvraj singh","id":59808841,"id_str":"59808841","indices":[118,130]}],"urls":[]},"truncated":false,"metadata":{"iso_language_code":"en","result_type":"recent"},"source":"\u003ca href=\"http:\/\/twitter.com\/download\/iphone\" rel=\"nofollow\"\u003eTwitter for iPhone\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":84824934,"id_str":"84824934","name":"Ishan Saxena","screen_name":"shady_ishu","location":"India","description":"Leading Myself","url":null,"entities":{"description":{"urls":[]}},"protected":false,"followers_count":40,"friends_count":117,"listed_count":0,"created_at":"Sat Oct 24 11:29:43 +0000 2009","favourites_count":1,"utc_offset":19800,"time_zone":"New Delhi","geo_enabled":true,"verified":false,"statuses_count":12,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"022330","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme15\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme15\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/487592870\/DSCN0804_normal.JPG","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/487592870\/DSCN0804_normal.JPG","profile_link_color":"0084B4","profile_sidebar_border_color":"A8C7F7","profile_sidebar_fill_color":"C0DFEC","profile_text_color":"333333","profile_use_background_image":true,"has_extended_profile":false,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"lang":"en"}
+
+{"created_at":"Mon Mar 28 19:25:16 +0000 2016","id":714533837301153792,"id_str":"714533837301153792","text":"Muwstifizur packs tour with best bowling figures of this t20 world cup.. 5\/22.. bravo @ICCWT20_Score","entities":{"hashtags":[],"symbols":[],"user_mentions":[{"screen_name":"ICCWT20_Score","name":"#wt20 #Worldt20","id":1635051698,"id_str":"1635051698","indices":[86,100]}],"urls":[]},"truncated":false,"metadata":{"iso_language_code":"en","result_type":"recent"},"source":"\u003ca href=\"http:\/\/twitter.com\" rel=\"nofollow\"\u003eTwitter Web Client\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":2280429889,"id_str":"2280429889","name":"Shaik Areef","screen_name":"ShaikAreef11","location":"","description":"Certification in Quicbooks. Part time\/Ful time Bookkeeper. Anybody interest in getting thier accounts reconciled tweet me....","url":null,"entities":{"description":{"urls":[]}},"protected":false,"followers_count":50,"friends_count":489,"listed_count":3,"created_at":"Tue Jan 07 10:53:10 +0000 2014","favourites_count":1098,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":787,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"C0DEED","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/575375353272659968\/hMYl7u-H_normal.jpeg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/575375353272659968\/hMYl7u-H_normal.jpeg","profile_link_color":"0084B4","profile_sidebar_border_color":"C0DEED","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":true,"has_extended_profile":false,"default_profile":true,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"lang":"en"}
+
+
+
+-c fetch_by_user_names:
+This option was used to get tweets by a particular user. 
+
+First read the username.txt file and stores every name in a list. Then for each 
+name, fetched tweets using API. for every tweet extracted the tweet_text and write
+it into a csv file in the format 'username, tweet_text'.
+For http request, I have used 4 parameters 'screen_name' which indicate the name
+of user whose tweets needs to be fetched, 'count' number of tweets (100), 'include_rts'
+whether to include re-tweets (false) and 'exclude_replies' whether to exclude replies 
+for tweets (true). I have also added a check for response status equal to 200 
+which is HTTP_SUCCESS. If any of the response is not successfully retrived, 
+it will skip the response packet and move on to next one. 
+Thus avoiding the program from crashing. In order to convert multiline tweet into 
+single line I have replaced new-line charachter by space.
+
+breaking_bad_tweets.csv is included in this homework submission.
+
+First 5 tweets from breaking_bad_tweets.csv:
+user_name,tweet
+BryanCranston,"Me as Pres. Johnson (190lbs-2+ hrs makeup!) A sneak tease for #AllTheWay, on @HBO this May. https://t.co/NraISAav7i https://t.co/fs6oeiLb88"
+BryanCranston,Soaked on the set of #WhyHim?How can getting wet - fully clothed be so much fun? You are going down James Franco! https://t.co/jpHUe4Yokx
+BryanCranston,"Search words read as if ESPN radio is gay. No, but my friend is now out and able to breathe deep. Proud of ya Steve! https://t.co/FGr5gFytMb"
+BryanCranston,At the Vanity Fair party last night I met the great @DonRickles What a thrill to chat with this comic genius! https://t.co/HPUh8Un3zn
+BryanCranston,"Wow! I visited my elementary school w/ @RobinRoberts on Journey to the Oscars on ""20/20"" tonight 10 p.m. ET on ABC.  https://t.co/ulp5H6JBTH"
+
+
+
+
+frequency.py
+-------------------------------------------------------------------------------
+This python script is used to compute the frequency of each word in tweet file.
+
+The scripts first reads the stopwords file and stores it into a dictionary.
+Then the script reads tweet from tweet file, extracts the tweet_text from the 
+tweet and then splits the tweet_text using space to form a list of words.
+For each wordin list, it first determines if the type of the word i.e. 
+NAME_TAG, HASH_TAG, LINK, NORMAL and NONE.
+For data cleaning, I am currently ignoring emoticons, numbers and words in other languages
+just considerig words with english alphabets, name tags, hash tags and liks.
+With proper guidance and help, I can include these things as well and compute
+frequency for these terms.
+Once word type is decided, the word count is incremented in respective dictionary.
+There are 5 dictionaries one for each name_tag, hash_tag, link, normal and 
+all of them.
+Once all the words in all the tweets are counted, frequency is computed for 
+each word in each dictionary and stored as a tuple list in format (word, frequency)
+Then the tuple list is sorted in descending order.
+Thus at the end, the program has 5 list for each of name_tag, hash_tag, link, normal and 
+all of them sorted in descending order.
+
+The questions asks us to print freq for all. But, for a data scientist, the seperate 
+frequency of name tags and hash tags can prove very helpful in further analysis.
+
+The usage of script is as follows:
+USAGE : python3 frequency.py <stopword_file> <tweet_file> [Print Distributed frequency (Y/N)]
+
+There are 2 mandatory arguments, one for stopwords file, second for tweet file.
+The 3 rd argument is optional. User can specify, whether he wants to print distributed
+frequency or not. If it is not specified, then by default 'N' is considered.
+
+The output of frequency.py is store in file term_freq_abanso2.txt
+rt 0.073863
+get 0.006695
+like 0.006056
+love 0.005752
+one 0.004443
+weather 0.003713
+people 0.003256
+good 0.003135
+new 0.003104
+u 0.003043
+know 0.003013
+want 0.002891
+go 0.002556
+see 0.002526
+got 0.002496
+need 0.002465
+back 0.002374
+make 0.002374
+look 0.002374
+take 0.002191
+time 0.002161
+day 0.002039
+think 0.002009
+never 0.001948
+lol 0.001948
+really 0.001887
+still 0.001887
+going 0.001796
+updates 0.001796
+life 0.001765
+
+In the sample output, the word rt has appeared most frequently, so it has highest frequency.
+In order to keep data clean, I have removed all the emoticons and words in other languages.
+
+Kindly run the script with 4th argument as well and check the output.
+
+Please suggest changes/improvements if any.
+
